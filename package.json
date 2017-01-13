@@ -1,0 +1,31 @@
+{
+	"name": "@microduino-private/email-service",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {},
+	"dependencies": {
+		"@gongt/jenv-data": "*",
+		"@types/body-parser": "0.0.33",
+		"@types/debug": "0.0.29",
+		"@types/express": "^4.0.33",
+		"@types/extend": "^2.0.30",
+		"@types/morgan": "^1.7.32",
+		"@types/node": "^6.0.45",
+		"@types/nodemailer": "^1.3.32",
+		"@types/validator": "^5.7.35",
+		"body-parser": "^1.15.2",
+		"debug": "^2.5.2",
+		"express": "^4.14.0",
+		"extend": "^3.0.0",
+		"mongoose": "^4.7.6",
+		"morgan": "^1.7.0",
+		"multer": "^1.2.1",
+		"nodemailer": "^2.7.0",
+		"request": "^2.79.0",
+		"serve-favicon": "~2.3.0",
+		"source-map-support": "^0.4.8",
+		"typescript-common-library": "http://github.com/GongT/typescript-common-library.git",
+		"validator": "^6.2.1"
+	},
+	"devDependencies": {}
+}

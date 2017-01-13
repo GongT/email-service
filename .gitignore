@@ -1,0 +1,22 @@
+### START MICRO-BUILD SECTION >>>
+# DO NOT EDIT THIS BY HAND
+.*
+.tgz
+node_modules
+jspm_packages
+**/node_modules
+**/jspm_packages
+*.log
+npm-debug.log*
+coverage/
+typings/
+!.micro-build
+.micro-build/*
+!.micro-build/config.ts
+!.*ignore
+dist
+package/dist
+### <<< END MICRO-BUILD SECTION
+
+typescript-common-library
+temp-upload-dir

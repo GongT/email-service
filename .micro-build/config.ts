@@ -52,6 +52,10 @@ const FILE = resolve(__dirname, '../package/src/config.ts');
 
 build.listenPort(JsonEnv.email.debugPort);
 
+build.addPlugin(EPlugins.npm_publish, {
+	path: './package'
+});
+
 build.onConfig((isBuild) => {
 	let baseDomainWithPort;
 	if (isBuild) {

@@ -24,7 +24,7 @@
 		"request": "^2.79.0",
 		"serve-favicon": "~2.3.0",
 		"source-map-support": "^0.4.8",
-		"typescript-common-library": "http://github.com/GongT/typescript-common-library.git",
+		"typescript-common-library": "latest",
 		"validator": "^6.2.1"
 	},
 	"devDependencies": {}

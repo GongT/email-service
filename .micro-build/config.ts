@@ -13,7 +13,7 @@ const projectName = 'email';
 
 build.baseImage('node', 'alpine');
 build.projectName(projectName);
-build.domainName(projectName + '.' + JsonEnv.baseDomain);
+build.domainName(projectName + '.' + JsonEnv.baseDomainName);
 // build.domainName(projectName + '.' + JsonEnv.baseDomainName);
 
 build.isInChina(JsonEnv.gfw.isInChina, JsonEnv.gfw);
@@ -39,10 +39,31 @@ build.addPlugin(EPlugins.typescript, {
 	target: 'package/dist',
 });
 
-build.environmentVariable('DEBUG', 'email:*');
-build.environmentVariable('DEBUG_PORT',  JsonEnv.email.debugPort);
+build.environmentVariableAppend('DEBUG', ',email:*');
 
 // build.volume('/host/folder/path', '/mnt/in/container');
 
 // build.prependDockerFile('/path/to/docker/file');
 // build.appendDockerFile('/path/to/docker/file');
+
+const {resolve} = require("path");
+const {writeFileSync} = require("fs");
+const FILE = resolve(__dirname, '../package/src/config.ts');
+
+build.listenPort(JsonEnv.email.debugPort);
+
+build.onConfig((isBuild) => {
+	let baseDomainWithPort;
+	if (isBuild) {
+		baseDomainWithPort = 'http://' + projectName + '.' + JsonEnv.baseDomainName;
+	} else {
+		const port = build.toJSON().port;
+		baseDomainWithPort = 'http://127.0.0.1:' + port;
+	}
+	const config = `
+export const base: string = ${JSON.stringify(baseDomainWithPort)};
+export const token: string = ${JSON.stringify(JsonEnv.email.request_key)};
+`;
+	console.log('write config.ts: %s', config);
+	writeFileSync(FILE, config.trim(), 'utf-8');
+});

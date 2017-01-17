@@ -25,7 +25,6 @@ rawSendApi.handleArgument('text').fromPost().optional('')
 rawSendApi.handleArgument('html').fromPost()
           .filter(new ValueChecker().isString().isNotEmpty());
 rawSendApi.setAsyncHandler((context) => {
-	console.log(context)
 	const email: SendMailOptions = {
 		from: senderAddress,
 		to: context.params.to,
@@ -49,8 +48,10 @@ rawSendApi.setAsyncHandler((context) => {
 	}
 	
 	debug(email);
-	return <any> transporter.sendMail(email).then(() => {
+	return <any> transporter.sendMail(email).then((e) => {
 		return {};
+	},(e) => {
+		return Promise.reject(e);
 	});
 });
 

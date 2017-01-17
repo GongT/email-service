@@ -1,3 +1,5 @@
+/// <reference path="./globals.d.ts"/>
+
 import {requestJson} from "./request-wrap";
 export interface IEmailSenderOptions {
 	projectName: string;

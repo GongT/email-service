@@ -1,4 +1,3 @@
-/// <reference types="request" />
 import {base, token} from "./config";
 const request = require("request");
 

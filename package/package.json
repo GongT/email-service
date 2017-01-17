@@ -1,15 +1,15 @@
 {
-  "name": "@microduino-private/email-sender",
-  "version": "1.0.0",
-  "description": "microduino email sender",
-  "main": "dist/index.js",
-  "scripts": {},
-  "author": "",
-  "dependencies": {
-    "@types/request": "0.0.39",
-    "request": "^2.79.0"
-  },
-  "devDependencies": {
-    "@types/node": "^7.0.0"
-  }
+	"name": "@microduino-private/email-sender",
+	"version": "1.0.0",
+	"description": "microduino email sender",
+	"main": "dist/index.js",
+	"scripts": {},
+	"author": "",
+	"dependencies": {
+		"request": "^2.79.0"
+	},
+	"devDependencies": {
+		"@types/request": "0.0.39",
+		"@types/node": "^7.0.0"
+	}
 }

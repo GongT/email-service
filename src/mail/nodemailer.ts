@@ -1,3 +1,5 @@
+/// <reference path="../globals.d.ts"/>
+
 import {createTransport} from "nodemailer";
 import {createDebug} from "typescript-common-library/server/debug";
 const debug = createDebug('mail');

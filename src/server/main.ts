@@ -1,4 +1,5 @@
-/// <reference path="../../globals.d.ts"/>
+/// <reference path="../globals.d.ts"/>
+
 import {checkMailServer} from "../mail/nodemailer";
 import {waitDatabaseToConnect} from "typescript-common-library/server/database/mongodb";
 import {bootExpressApp} from "typescript-common-library/server/boot/express-init";

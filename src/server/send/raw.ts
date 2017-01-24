@@ -1,12 +1,12 @@
-import {senderAddress} from "../../mail/nodemailer";
+import {senderAddress, transporter} from "../../mail/nodemailer";
 import {SendMailOptions} from "nodemailer";
-import {createDebug} from "typescript-common-library/server/debug";
+import {createDebug, LEVEL} from "typescript-common-library/server/debug";
 import {JsonApiHandler} from "typescript-common-library/server/express/api-handler";
 import {ApiResponse, ApiRequest} from "typescript-common-library/server/express/protocol";
 import {ERequestType} from "typescript-common-library/server/express/base/types";
 import {ValueChecker} from "typescript-common-library/server/value-checker/value-checker";
 
-const debug = createDebug('raw');
+const debug = createDebug('raw', LEVEL.SILLY);
 
 interface SendBody extends ApiRequest {
 	to: string;
@@ -46,18 +46,12 @@ rawSendApi.setAsyncHandler((context) => {
 			};
 		});
 	}
-	return <any>new Promise((resolve, reject) => {
-		setTimeout(() => {
-			context.response.success();
-		}, 1000);
+	debug(email);
+	return <any> transporter.sendMail(email).then((e) => {
+		context.response.success();
+	}, (e) => {
+		return Promise.reject(e);
 	});
-	/*
-	 debug(email);
-	 return <any> transporter.sendMail(email).then((e) => {
-	 context.response.success();
-	 }, (e) => {
-	 return Promise.reject(e);
-	 });*/
 });
 
 export default rawSendApi;

@@ -1,6 +1,6 @@
 {
 	"name": "@microduino-private/email-service",
-	"version": "0.0.0",
+	"version": "0.0.0-1",
 	"private": true,
 	"scripts": {},
 	"dependencies": {
@@ -29,5 +29,6 @@
 		"typescript-common-library": "latest",
 		"validator": "^6.2.1"
 	},
-	"devDependencies": {}
+	"devDependencies": {},
+	"backupVersion": "0.0.0"
 }

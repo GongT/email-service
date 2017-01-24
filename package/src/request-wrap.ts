@@ -1,4 +1,4 @@
-import {base, token} from "./config";
+import {CONFIG_BASE_DOMAIN, token} from "./cfg";
 const request = require("request");
 
 const pkgVersion = require('../package.json').version;
@@ -12,7 +12,7 @@ export function requestJson(method: string, api: string, params: any, body?: any
 		body = Object.assign({}, body);
 	}
 	const opt = {
-		baseUrl: base,
+		baseUrl: CONFIG_BASE_DOMAIN,
 		qs: params, // Object
 		json: true,
 		method: method,
@@ -26,9 +26,9 @@ export function requestJson(method: string, api: string, params: any, body?: any
 		timeout: 10000,
 	};
 	return new Promise<void>((resolve, reject) => {
-		const wrappedCallback = (err, data) => err? reject(err) : resolve(data);
-		console.log(api, opt);
-		request.post(api, opt, wrappedCallback)
+		request.post(api, opt, (err, res, body) => {
+			return err? reject(err) : resolve(body);
+		});
 	}).then((s: any) => {
 		console.log('request resolve');
 		if (s.status !== 0) {

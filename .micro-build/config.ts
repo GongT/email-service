@@ -1,5 +1,8 @@
-import {MicroBuildConfig, EPlugins} from "./x/microbuild-config";
+import {MicroBuildHelper} from "./x/microbuild-helper";
+import {MicroBuildConfig, ELabelNames, EPlugins} from "./x/microbuild-config";
+import {JsonEnv} from "../.jsonenv/_current_result";
 declare const build: MicroBuildConfig;
+declare const helper: MicroBuildHelper;
 /*
  +==================================+
  | <**DON'T EDIT ABOVE THIS LINE**> |
@@ -46,28 +49,17 @@ build.environmentVariableAppend('DEBUG', ',email:*');
 // build.prependDockerFile('/path/to/docker/file');
 // build.appendDockerFile('/path/to/docker/file');
 
-const {resolve} = require("path");
-const {writeFileSync} = require("fs");
-const FILE = resolve(__dirname, '../package/src/config.ts');
-
 build.listenPort(JsonEnv.email.debugPort);
 
 build.addPlugin(EPlugins.npm_publish, {
 	path: './package'
 });
 
+build.dockerRunArgument('--dns=${HOST_LOOP_IP}');
+
 build.onConfig((isBuild) => {
-	let baseDomainWithPort;
-	if (isBuild) {
-		baseDomainWithPort = 'http://' + projectName + '.' + JsonEnv.baseDomainName;
-	} else {
-		const port = build.toJSON().port;
-		baseDomainWithPort = 'http://127.0.0.1:' + port;
-	}
-	const config = `
-export const base: string = ${JSON.stringify(baseDomainWithPort)};
+	const config = helper.createConfig(`
 export const token: string = ${JSON.stringify(JsonEnv.email.request_key)};
-`;
-	console.log('write config.ts: %s', config);
-	writeFileSync(FILE, config.trim(), 'utf-8');
+`);
+	config.save('package/src/cfg.ts');
 });

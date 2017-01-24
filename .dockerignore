@@ -1,11 +1,9 @@
 ### START MICRO-BUILD SECTION >>>
 # DO NOT EDIT THIS BY HAND
 .*
-.tgz
-node_modules
-jspm_packages
-**/node_modules
-**/jspm_packages
+*.tgz
+node_modules/
+jspm_packages/
 *.log
 npm-debug.log*
 coverage/
@@ -19,6 +17,8 @@ Dockerfile
 !.micro-build/bin
 !.micro-build/package-json
 !.micro-build/jspm-install
-dist
-package/dist
+!.micro-build/plugins
+dist/
+package/dist/
+package/src/cfg.ts
 ### <<< END MICRO-BUILD SECTION

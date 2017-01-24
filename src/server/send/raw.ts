@@ -1,4 +1,4 @@
-import {transporter, senderAddress} from "../../mail/nodemailer";
+import {senderAddress} from "../../mail/nodemailer";
 import {SendMailOptions} from "nodemailer";
 import {createDebug} from "typescript-common-library/server/debug";
 import {JsonApiHandler} from "typescript-common-library/server/express/api-handler";
@@ -46,13 +46,18 @@ rawSendApi.setAsyncHandler((context) => {
 			};
 		});
 	}
-	
-	debug(email);
-	return <any> transporter.sendMail(email).then((e) => {
-		return {};
-	},(e) => {
-		return Promise.reject(e);
+	return <any>new Promise((resolve, reject) => {
+		setTimeout(() => {
+			context.response.success();
+		}, 1000);
 	});
+	/*
+	 debug(email);
+	 return <any> transporter.sendMail(email).then((e) => {
+	 context.response.success();
+	 }, (e) => {
+	 return Promise.reject(e);
+	 });*/
 });
 
 export default rawSendApi;

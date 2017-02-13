@@ -2,7 +2,10 @@
 	"name": "@microduino-private/email-service",
 	"version": "0.0.0-1",
 	"private": true,
-	"scripts": {},
+	"scripts": {
+		"build": "microbuild build",
+		"service": "microbuild control"
+	},
 	"dependencies": {
 		"@gongt/jenv-data": "*",
 		"@types/body-parser": "0.0.33",

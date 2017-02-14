@@ -11,6 +11,7 @@ npm-debug.log*
 coverage/
 typings
 !.*ignore
+!.gitinclude
 dist/
 package/dist/
 package/src/cfg.ts

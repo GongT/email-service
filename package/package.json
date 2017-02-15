@@ -1,6 +1,6 @@
 {
 	"name": "@microduino-private/email-sender",
-	"version": "1.0.0-3",
+	"version": "1.0.0",
 	"description": "microduino email sender",
 	"main": "dist/index.js",
 	"scripts": {},
@@ -11,6 +11,5 @@
 	"devDependencies": {
 		"@types/request": "0.0.39",
 		"@types/node": "^7.0.0"
-	},
-	"backupVersion": "1.0.0"
+	}
 }

@@ -22,7 +22,7 @@ build.domainName(projectName + '.' + JsonEnv.baseDomainName);
 build.forceLocalDns();
 build.isInChina(JsonEnv.gfw.isInChina, JsonEnv.gfw);
 build.npmCacheLayer(JsonEnv.gfw.npmRegistry);
-build.npmInstall('./package.json');
+build.npmInstall('./package.json', ['git']);
 
 build.forwardPort(80, 'tcp');
 

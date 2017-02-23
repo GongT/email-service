@@ -5,6 +5,7 @@ import {waitDatabaseToConnect} from "typescript-common-library/server/database/m
 import {bootExpressApp} from "typescript-common-library/server/boot/express-init";
 import {createExpressApp, createRouterOn} from "typescript-common-library/server/boot/express-app-builder";
 import {resolve} from "path";
+import {initServiceWait} from "typescript-common-library/server/boot/init-systemd-service";
 
 // enableDebugConsoleOnNetwork();
 
@@ -18,12 +19,11 @@ apiRouter.internalProtect(JsonEnv.email.request_key);
 
 const app = appCreator.generateApplication();
 
-Promise.all([
+const initQueue = Promise.all([
 	checkMailServer(),
 	waitDatabaseToConnect(),
 ]).then(() => {
-	bootExpressApp(app);
-}, (e) => {
-	console.error(e);
-	process.exit(1);
+	return bootExpressApp(app);
 });
+
+initServiceWait(initQueue);

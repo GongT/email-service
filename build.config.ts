@@ -20,12 +20,12 @@ build.domainName(projectName + '.' + JsonEnv.baseDomainName);
 // build.domainName(projectName + '.' + JsonEnv.baseDomainName);
 
 build.systemdType('notify');
-build.systemdWatchdog(10);
+build.systemdWatchdog(30);
 
 build.forceLocalDns();
 build.isInChina(JsonEnv.gfw.isInChina, JsonEnv.gfw);
 build.npmCacheLayer(JsonEnv.gfw.npmRegistry);
-build.npmInstall('./package.json', ['git']);
+build.npmInstall('./package.json', ['git', 'make', 'g++', 'python']);
 
 build.forwardPort(80, 'tcp');
 

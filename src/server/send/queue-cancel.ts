@@ -10,8 +10,12 @@ import {instance as emailHistoryModel} from "../../database/mail-history";
 
 const debug = createDebug('raw', LEVEL.SILLY);
 
-interface SendBody extends ApiRequest,SendMailOptions {
-	files?: Express.Multer.File[];
+interface SendBody extends ApiRequest {
+	to: string;
+	subject: string;
+	text?: string;
+	html: string;
+	files?: Express.Multer.File[]
 }
 const rawSendApi = new JsonApiHandler<SendBody ,{} & ApiResponse>(ERequestType.TYPE_POST, '/send/raw');
 rawSendApi.handleArgument('to').fromPost()

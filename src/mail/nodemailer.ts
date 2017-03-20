@@ -10,6 +10,9 @@ debug('connect mail server with config: %j', JsonEnv.email);
 
 export function checkMailServer(): PromiseLike<any> {
 	return new Promise((resolve, reject) => {
+		if(JsonEnv.isDebug){
+			return resolve();
+		}
 		transporter.verify(function (error, success) {
 			if (error) {
 				debug(transporter);

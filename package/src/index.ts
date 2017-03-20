@@ -1,20 +1,23 @@
 /// <reference path="./globals.d.ts"/>
-
-import {requestJson} from "./request-wrap";
+import {RequestApiWrap, requestWrap} from "./request-wrap";
 export interface IEmailSenderOptions {
 	projectName: string;
+	requestToken?: string;
 }
 
 export class EmailSender {
 	private projectName: string;
 	
-	constructor(options:IEmailSenderOptions) {
-		if(!options){
+	private api: RequestApiWrap;
+	
+	constructor(options: IEmailSenderOptions) {
+		if (!options) {
 			throw new Error('no arguments.');
 		}
-		if(!options.projectName){
+		if (!options.projectName) {
 			throw new Error('no projectName.');
 		}
+		this.api = requestWrap(options.requestToken);
 		this.projectName = options.projectName;
 	}
 	
@@ -23,7 +26,10 @@ export class EmailSender {
 	}
 	
 	send(email: Email): Promise<void> {
-		return requestJson('post', 'api/send/raw', {}, email.toJSON());
+		if (!(email instanceof Email)) {
+			throw new TypeError('email-service:send require an email object, not others.')
+		}
+		return this.api('post', 'api/send/raw', {}, email.toJSON());
 	}
 }
 export class Email {
@@ -45,7 +51,7 @@ export class Email {
 		return this.build.send(this);
 	}
 	
-	toJSON() {
+	toJSON(): EmailStruct {
 		if (!this.to) {
 			throw new Error('do not know send to whom');
 		}
@@ -57,14 +63,14 @@ export class Email {
 			throw new Error('must have subject');
 		}
 		
-		if(!this.text){
-			this.text= 'your email client is not support HTML, please use another client.';
+		if (!this.text) {
+			this.text = 'your email client is not support HTML, please use another client.';
 		}
 		return {
 			to: this.to,
 			subject: this.subject,
 			html: this.content,
 			text: this.text,
-		}
+		};
 	}
 }

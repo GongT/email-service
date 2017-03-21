@@ -34,7 +34,7 @@ rawSendApi.setHandler(async(context) => {
 		const {callbackId, to, subject, html, text,} = list[i];
 		try {
 			const ret = await sendQueue.appendQueue({to, subject, html, text}, context.params.callback, callbackId);
-			rawSendApi.debug('saved: ', ret);
+			rawSendApi.debug('saved');
 			result[ret.callback_id] = ret._id;
 		} catch (e) {
 			failed.push(callbackId);

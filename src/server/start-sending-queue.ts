@@ -5,23 +5,43 @@ import {SendMailOptions} from "nodemailer";
 import {instance as emailHistoryModel} from "../database/mail-history";
 import {requestJson} from "typescript-common-library/server/communication/request-json";
 import {REQUEST_METHOD} from "typescript-common-library/library/request-method";
+import Timer = NodeJS.Timer;
 
 const debug = createLogger(LEVEL.SILLY, 'SendQueue');
 const error = createLogger(LEVEL.ERROR, 'SendQueue');
 const info = createLogger(LEVEL.INFO, 'raw');
 
+let currentTimeout: Timer;
+
 export function startSendingQueue() {
-	setTimeout(asyncSendNext, 1000);
+	currentTimeout = setTimeout(asyncSendNext, 1000);
 }
 
 function asyncSendNext() {
-	setTimeout(() => {
+	if (currentTimeout) {
+		error('start send queue twice.');
+		return;
+	}
+	currentTimeout = setTimeout(() => {
+		let timeoutReached = false;
+		const timeout = setTimeout(() => {
+			info('send mail timeout...');
+			timeoutReached = true;
+			currentTimeout = null;
+			setImmediate(asyncSendNext);
+		}, 30000);
 		sendNext().then((c) => {
 			if (c) {
 				debug('success process %s queued mails.', c);
 			}
 		}, (e) => {
 			error('failed process queued mail: %j', e);
+		}).then(() => {
+			if (!timeoutReached) {
+				clearTimeout(timeout);
+				currentTimeout = null;
+				setImmediate(asyncSendNext);
+			}
 		});
 	}, 5000);
 }
@@ -63,7 +83,6 @@ async function sendNext() {
 			await list[i].set({sent: true, success: false, callback_result: disErr(e), callback_called: true}).save();
 		}
 	}
-	setTimeout(asyncSendNext, 5000);
 	
 	return list.length;
 }

@@ -1,3 +1,3 @@
 /// <reference types="node"/>
 /// <reference types="request"/>
-/// <reference path="../../email-struct.d.ts" />
+/// <reference path="./email-struct.d.ts" />

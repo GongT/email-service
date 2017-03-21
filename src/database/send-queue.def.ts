@@ -17,6 +17,7 @@ export const SendQueueSchema: SchemaDefinition = {
 		type: Boolean,
 		default: false,
 	},
+	callback_id: String,
 	callback_result: {
 		type: Boolean,
 		default: null,
@@ -30,5 +31,6 @@ export interface ISendQueueDoc extends MyDocument {
 	sent: boolean,
 	success: boolean,
 	callback_called: boolean,
+	callback_id: string,
 	callback_result: any,
 }

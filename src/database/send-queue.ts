@@ -8,13 +8,12 @@ export class SendQueue extends DataModel<ISendQueueDoc> {
 		return SendQueueSchema;
 	}
 	
-	public appendQueue(email: EmailStruct, callback: string): Promise<string> {
+	public appendQueue(email: EmailStruct, callback: string, callbackId: string = email.to): Promise<SendQueueModel> {
 		const q = this.create();
 		q.set('email', email);
 		q.set('callback', callback);
-		return q.save().then((e) => {
-			return e._id;
-		});
+		q.set('callback_id', callbackId);
+		return q.save();
 	}
 }
 

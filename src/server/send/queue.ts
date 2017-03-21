@@ -5,7 +5,7 @@ import {ValueChecker} from "typescript-common-library/server/value-checker/value
 import {instance as sendQueue} from "../../database/send-queue";
 
 interface SendBody extends ApiRequest {
-	list: EmailStruct[];
+	list: (EmailStruct & {callbackId: string})[];
 	callback: string;
 }
 const rawSendApi = new JsonApiHandler<SendBody ,{} & ApiResponse>(ERequestType.TYPE_POST, '/send/queue');
@@ -15,6 +15,7 @@ email_checker.field('to').isString().isEmail();
 email_checker.field('subject').isString().isNotEmpty();
 email_checker.field('html').isString().isNotEmpty();
 email_checker.optionalField('text').isString();
+email_checker.optionalField('callbackId').isString();
 rawSendApi.handleArgument('list').fromPost()
           .filter(new ValueChecker().isArray().min(1).every(email_checker));
 
@@ -28,14 +29,19 @@ rawSendApi.handleArgument('callback').fromPost()
 
 rawSendApi.setHandler(async(context) => {
 	const list = context.params.list;
-	const result = [];
+	const result = {}, failed = [];
 	for (let i = list.length - 1; i >= 0; i--) {
-		const ret = await sendQueue.appendQueue(list[i], context.params.callback);
-		rawSendApi.debug('saved: ', ret);
-		result.push(ret);
+		const {callbackId, to, subject, html, text,} = list[i];
+		try {
+			const ret = await sendQueue.appendQueue({to, subject, html, text}, context.params.callback, callbackId);
+			rawSendApi.debug('saved: ', ret);
+			result[ret.callback_id] = ret._id;
+		} catch (e) {
+			failed.push(callbackId);
+		}
 	}
 	
-	return {queued: result,};
+	return {queued: result, failed: failed};
 });
 
 export default rawSendApi;

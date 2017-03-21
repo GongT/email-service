@@ -49,17 +49,17 @@ async function sendNext() {
 			await transporter.sendMail(email);
 			debug('send mail has success');
 			await emailHistoryModel.createHistory(email);
-			await list[i].set({sent: true, success: false}).save();
+			await list[i].set({sent: true, success: true}).save();
 		} catch (e) {
 			error('send mail failed: %j', e);
 			await list[i].set({sent: true, success: false,}).save();
 		}
 		
 		try {
-			const ret = await requestJson(REQUEST_METHOD.POST, list[i].callback, Object.assign({}, list[i]));
-			await list[i].set({sent: true, success: true, callback_result: ret, callback_called: true}).save();
+			const ret = await requestJson(REQUEST_METHOD.POST, list[i].callback, Object.assign({}, list[i].toJSON()));
+			await list[i].set({sent: true, callback_result: ret, callback_called: true}).save();
 		} catch (e) {
-			error('mail callback failed: %j', e);
+			error('mail callback failed: %j', e.message);
 			await list[i].set({sent: true, success: false, callback_result: disErr(e), callback_called: true}).save();
 		}
 	}

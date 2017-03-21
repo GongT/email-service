@@ -1,14 +1,14 @@
-import {senderAddress, transporter} from "../../mail/nodemailer";
+import {senderAddress, transporter, senderName} from "../../mail/nodemailer";
 import {SendMailOptions} from "nodemailer";
 import {createDebug, LEVEL} from "typescript-common-library/server/debug";
 import {JsonApiHandler} from "typescript-common-library/server/express/api-handler";
 import {ApiResponse, ApiRequest} from "typescript-common-library/server/express/protocol";
 import {ERequestType} from "typescript-common-library/server/express/base/types";
 import {ValueChecker} from "typescript-common-library/server/value-checker/value-checker";
-import {serverRequestOnly} from "typescript-common-library/server/safe/server-request-only";
 import {instance as emailHistoryModel} from "../../database/mail-history";
 
 const debug = createDebug('raw', LEVEL.SILLY);
+const info = createDebug('raw', LEVEL.INFO);
 
 interface SendBody extends ApiRequest,SendMailOptions {
 	files?: Express.Multer.File[];
@@ -25,6 +25,7 @@ rawSendApi.handleArgument('html').fromPost()
 rawSendApi.setAsyncHandler((context) => {
 	const email: SendMailOptions = {
 		from: senderAddress,
+		sender: senderName,
 		to: context.params.to,
 		subject: context.params.subject,
 		html: context.params.html,
@@ -44,11 +45,14 @@ rawSendApi.setAsyncHandler((context) => {
 			};
 		});
 	}
+	info('send a mail to %s.', email.to);
 	debug(email);
 	return <any> transporter.sendMail(email).then((e) => {
+		debug('mail send success');
 		emailHistoryModel.createHistory(email);
 		context.response.success();
 	}, (e) => {
+		debug('mail send failed', e);
 		return Promise.reject(e);
 	});
 });

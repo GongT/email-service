@@ -13,6 +13,14 @@ export const SendQueueSchema: SchemaDefinition = {
 		type: Boolean,
 		default: false,
 	},
+	callback_called: {
+		type: Boolean,
+		default: false,
+	},
+	callback_result: {
+		type: Boolean,
+		default: null,
+	},
 };
 
 export interface ISendQueueDoc extends MyDocument {
@@ -21,4 +29,6 @@ export interface ISendQueueDoc extends MyDocument {
 	callback: string,
 	sent: boolean,
 	success: boolean,
+	callback_called: boolean,
+	callback_result: any,
 }

@@ -14,7 +14,7 @@ const info = createLogger(LEVEL.INFO, 'raw');
 let currentTimeout: Timer;
 
 export function startSendingQueue() {
-	currentTimeout = setTimeout(asyncSendNext, 1000);
+	setTimeout(asyncSendNext, 1000);
 }
 
 function asyncSendNext() {

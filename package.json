@@ -19,6 +19,7 @@
 		"@types/request": "0.0.39",
 		"@types/validator": "^5.7.35",
 		"body-parser": "^1.16.0",
+		"colors": "^1.1.2",
 		"debug": "^2.6.0",
 		"express": "^4.14.1",
 		"extend": "^3.0.0",
@@ -30,7 +31,8 @@
 		"serve-favicon": "~2.3.2",
 		"source-map-support": "^0.4.11",
 		"typescript-common-library": "git+https://github.com/GongT/typescript-common-library.git",
-		"validator": "^6.2.1"
+		"validator": "^6.2.1",
+		"winston": "^2.3.1"
 	},
 	"devDependencies": {},
 	"backupVersion": "0.0.0"

@@ -4,7 +4,7 @@ import {senderAddress, transporter, senderName} from "../mail/nodemailer";
 import {SendMailOptions} from "nodemailer";
 import {instance as emailHistoryModel} from "../database/mail-history";
 import {requestJson} from "typescript-common-library/server/communication/request-json";
-import {REQUEST_METHOD} from "typescript-common-library/library/request-method";
+import {REQUEST_METHOD} from "typescript-common-library/server/library/request-method";
 import Timer = NodeJS.Timer;
 
 const debug = createLogger(LEVEL.SILLY, 'SendQueue');

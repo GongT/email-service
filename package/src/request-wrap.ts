@@ -1,4 +1,4 @@
-import {CONFIG_BASE_DOMAIN, token} from "./cfg";
+import {token, CONFIG_BASE_DOMAIN_SERVER} from "./cfg";
 const request = require("request");
 
 const pkgVersion = require('../package.json').version;
@@ -17,7 +17,7 @@ export function requestWrap(requestKey: string = token): RequestApiWrap {
 			body = Object.assign({}, body);
 		}
 		const opt = {
-			baseUrl: CONFIG_BASE_DOMAIN,
+			baseUrl: CONFIG_BASE_DOMAIN_SERVER,
 			qs: params, // Object
 			json: true,
 			method: method,

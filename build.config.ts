@@ -63,7 +63,7 @@ build.dockerRunArgument('--dns=${HOST_LOOP_IP}');
 
 build.onConfig((isBuild) => {
 	const config = helper.createConfig(`
-export const token: string = ${JSON.stringify(JsonEnv.email.request_key)};
+export const token: string = ${JSON.stringify(JsonEnv.serverRequestKey)};
 `);
 	config.save('package/src/cfg.ts');
 });

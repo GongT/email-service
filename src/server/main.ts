@@ -1,4 +1,4 @@
-import "./prepare";
+import "./prepare"; // must be first
 import {checkMailServer} from "../mail/nodemailer";
 import {waitDatabaseToConnect} from "typescript-common-library/server/database/mongodb";
 import {bootExpressApp} from "typescript-common-library/server/boot/express-init";

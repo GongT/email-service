@@ -18,7 +18,7 @@
 		"sourceMap": true,
 		"baseUrl": "./",
 		"typeRoots": [
-			 "../node_modules/@types"
+			"../node_modules/@types"
 		],
 		"types": [
 		],
@@ -26,5 +26,5 @@
 		"outDir": "../dist",
 		"rootDir": "./"
 	},
-	"exclude": ["./client", "node_module", "./dist", "global.d.ts"]
+	"exclude": ["../node_modules"]
 }

@@ -1,7 +1,7 @@
-import {JsonApiHandler} from "typescript-common-library/server/express/api-handler";
-import {ApiResponse, ApiRequest} from "typescript-common-library/server/express/protocol";
-import {ERequestType} from "typescript-common-library/server/express/base/types";
-import {ValueChecker} from "typescript-common-library/server/value-checker/value-checker";
+import {JsonApiHandler} from "@gongt/ts-stl-server/express/api-handler";
+import {ApiResponse, ApiRequest} from "@gongt/ts-stl-server/express/protocol";
+import {ERequestType} from "@gongt/ts-stl-server/express/base/types";
+import {ValueChecker} from "@gongt/ts-stl-server/value-checker/value-checker";
 import {instance as sendQueue} from "../../database/send-queue";
 
 interface SendBody extends ApiRequest {

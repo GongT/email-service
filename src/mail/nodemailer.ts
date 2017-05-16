@@ -1,6 +1,6 @@
 /// <reference path="../globals.d.ts"/>
 import {createTransport} from "nodemailer";
-import {createDebug} from "typescript-common-library/server/debug";
+import {createDebug} from "@gongt/ts-stl-server/debug";
 const debug = createDebug('mail');
 
 export const senderAddress = JsonEnv.email.senderAddress || JsonEnv.email.mailService.auth.user;

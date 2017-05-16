@@ -1,5 +1,5 @@
 import {SchemaDefinition} from "mongoose";
-import {MyDocument} from "typescript-common-library/server/database/mongodb";
+import {MyDocument} from "@gongt/ts-stl-server/database/mongodb";
 
 export const SendQueueSchema: SchemaDefinition = {
 	_id: String,

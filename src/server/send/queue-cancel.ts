@@ -1,6 +1,6 @@
-import {JsonApiHandler} from "typescript-common-library/server/express/api-handler";
-import {ApiResponse, ApiRequest} from "typescript-common-library/server/express/protocol";
-import {ERequestType} from "typescript-common-library/server/express/base/types";
+import {JsonApiHandler} from "@gongt/ts-stl-server/express/api-handler";
+import {ApiResponse, ApiRequest} from "@gongt/ts-stl-server/express/protocol";
+import {ERequestType} from "@gongt/ts-stl-server/express/base/types";
 
 interface CancelBody extends ApiRequest {
 }

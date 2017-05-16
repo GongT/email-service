@@ -1,10 +1,10 @@
 import {senderAddress, transporter, senderName} from "../../mail/nodemailer";
 import {SendMailOptions} from "nodemailer";
-import {createDebug, LEVEL} from "typescript-common-library/server/debug";
-import {JsonApiHandler} from "typescript-common-library/server/express/api-handler";
-import {ApiResponse, ApiRequest} from "typescript-common-library/server/express/protocol";
-import {ERequestType} from "typescript-common-library/server/express/base/types";
-import {ValueChecker} from "typescript-common-library/server/value-checker/value-checker";
+import {createDebug, LEVEL} from "@gongt/ts-stl-server/debug";
+import {JsonApiHandler} from "@gongt/ts-stl-server/express/api-handler";
+import {ApiResponse, ApiRequest} from "@gongt/ts-stl-server/express/protocol";
+import {ERequestType} from "@gongt/ts-stl-server/express/base/types";
+import {ValueChecker} from "@gongt/ts-stl-server/value-checker/value-checker";
 import {instance as emailHistoryModel} from "../../database/mail-history";
 
 const debug = createDebug('raw', LEVEL.SILLY);

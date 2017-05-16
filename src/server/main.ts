@@ -1,10 +1,10 @@
 import "./prepare"; // must be first
 import {checkMailServer} from "../mail/nodemailer";
-import {waitDatabaseToConnect} from "typescript-common-library/server/database/mongodb";
-import {bootExpressApp} from "typescript-common-library/server/boot/express-init";
-import {createExpressApp, createRouterOn} from "typescript-common-library/server/boot/express-app-builder";
+import {waitDatabaseToConnect} from "@gongt/ts-stl-server/database/mongodb";
+import {bootExpressApp} from "@gongt/ts-stl-server/boot/express-init";
+import {createExpressApp, createRouterOn} from "@gongt/ts-stl-server/boot/express-app-builder";
 import {resolve} from "path";
-import {initServiceWait} from "typescript-common-library/server/boot/init-systemd-service";
+import {initServiceWait} from "@gongt/ts-stl-server/boot/init-systemd-service";
 import {startSendingQueue} from "./start-sending-queue";
 
 const appCreator = createExpressApp();

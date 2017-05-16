@@ -1,6 +1,6 @@
 import {Model, Document, SchemaDefinition} from "mongoose";
 import {SendQueueSchema, ISendQueueDoc} from "./send-queue.def";
-import {DataModel} from "typescript-common-library/server/database/mongodb";
+import {DataModel} from "@gongt/ts-stl-server/database/mongodb";
 
 export type SendQueueModel = ISendQueueDoc & Document;
 export class SendQueue extends DataModel<ISendQueueDoc> {

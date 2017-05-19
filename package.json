@@ -8,7 +8,7 @@
 	},
 	"dependencies": {
 		"@gongt/jenv-data": "*",
-		"@gongt/ts-stl-server": "git+https://github.com/GongT/typescript-common-library.git",
+		"@gongt/ts-stl-server": "latest",
 		"body-parser": "^1.17.1",
 		"colors": "^1.1.2",
 		"debug": "^2.6.6",

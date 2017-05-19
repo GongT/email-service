@@ -1,14 +1,14 @@
 import {JsonApiHandler} from "@gongt/ts-stl-server/express/api-handler";
-import {ApiResponse, ApiRequest} from "@gongt/ts-stl-server/express/protocol";
-import {ERequestType} from "@gongt/ts-stl-server/express/base/types";
+import {ApiRequest, ApiResponse} from "@gongt/ts-stl-server/library/request/protocol";
+import {ERequestType} from "@gongt/ts-stl-server/library/request/request";
 import {ValueChecker} from "@gongt/ts-stl-server/value-checker/value-checker";
 import {instance as sendQueue} from "../../database/send-queue";
 
 interface SendBody extends ApiRequest {
-	list: (EmailStruct & {callbackId: string})[];
+	list: (EmailStruct&{callbackId: string})[];
 	callback: string;
 }
-const rawSendApi = new JsonApiHandler<SendBody ,{} & ApiResponse>(ERequestType.TYPE_POST, '/send/queue');
+const rawSendApi = new JsonApiHandler<SendBody, {}&ApiResponse>(ERequestType.TYPE_POST, '/send/queue');
 
 const email_checker = new ValueChecker().isObject();
 email_checker.field('to').isString().isEmail();
@@ -27,7 +27,7 @@ rawSendApi.handleArgument('callback').fromPost()
 	          require_valid_protocol: true,
           }));
 
-rawSendApi.setHandler(async(context) => {
+rawSendApi.setHandler(async (context) => {
 	const list = context.params.list;
 	const result = {}, failed = [];
 	for (let i = list.length - 1; i >= 0; i--) {

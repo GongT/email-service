@@ -1,10 +1,10 @@
 import {JsonApiHandler} from "@gongt/ts-stl-server/express/api-handler";
-import {ApiResponse, ApiRequest} from "@gongt/ts-stl-server/express/protocol";
-import {ERequestType} from "@gongt/ts-stl-server/express/base/types";
+import {ApiRequest, ApiResponse} from "@gongt/ts-stl-server/library/request/protocol";
+import {ERequestType} from "@gongt/ts-stl-server/library/request/request";
 
 interface CancelBody extends ApiRequest {
 }
-const rawSendApi = new JsonApiHandler<CancelBody ,{} & ApiResponse>(ERequestType.TYPE_POST, '/send/queue/cancel');
+const rawSendApi = new JsonApiHandler<CancelBody, {}&ApiResponse>(ERequestType.TYPE_POST, '/send/queue/cancel');
 rawSendApi.setHandler((context) => {
 	throw new Error('not-impl');
 });

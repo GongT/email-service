@@ -1,7 +1,7 @@
+import {ApiRequest, ApiResponse} from "@gongt/ts-stl-library/request/protocol";
+import {ERequestType} from "@gongt/ts-stl-library/request/request";
 import {createDebug, LEVEL} from "@gongt/ts-stl-server/debug";
 import {JsonApiHandler} from "@gongt/ts-stl-server/express/api-handler";
-import {ApiRequest, ApiResponse} from "@gongt/ts-stl-server/library/request/protocol";
-import {ERequestType} from "@gongt/ts-stl-server/library/request/request";
 import {ValueChecker} from "@gongt/ts-stl-server/value-checker/value-checker";
 import {SendMailOptions} from "nodemailer";
 import {instance as emailHistoryModel} from "../../database/mail-history";

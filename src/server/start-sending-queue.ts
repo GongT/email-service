@@ -1,10 +1,10 @@
-import {instance as sendQueue} from "../database/send-queue";
+import {REQUEST_METHOD} from "@gongt/ts-stl-library/request/request-method";
+import {requestJson} from "@gongt/ts-stl-server/communication/request-json";
 import {createLogger, LEVEL} from "@gongt/ts-stl-server/debug";
-import {senderAddress, transporter, senderName} from "../mail/nodemailer";
 import {SendMailOptions} from "nodemailer";
 import {instance as emailHistoryModel} from "../database/mail-history";
-import {requestJson} from "@gongt/ts-stl-server/communication/request-json";
-import {REQUEST_METHOD} from "@gongt/ts-stl-server/library/request/request-method";
+import {instance as sendQueue} from "../database/send-queue";
+import {senderAddress, senderName, transporter} from "../mail/nodemailer";
 import Timer = NodeJS.Timer;
 
 const debug = createLogger(LEVEL.SILLY, 'SendQueue');

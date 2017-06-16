@@ -1,6 +1,6 @@
 import {JsonApiHandler} from "@gongt/ts-stl-server/express/api-handler";
-import {ApiRequest, ApiResponse} from "@gongt/ts-stl-server/library/request/protocol";
-import {ERequestType} from "@gongt/ts-stl-server/library/request/request";
+import {ApiRequest, ApiResponse} from "@gongt/ts-stl-library/request/protocol";
+import {ERequestType} from "@gongt/ts-stl-library/request/request";
 
 interface CancelBody extends ApiRequest {
 }

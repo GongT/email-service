@@ -15,8 +15,7 @@ package-lock.json
 !.*ignore
 !.gitinclude
 dist/
-package/dist/
-package/src/cfg.ts
+dist/npm-package/
 ### <<< END MICRO-BUILD SECTION
 
 typescript-common-library

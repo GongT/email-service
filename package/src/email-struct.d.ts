@@ -1,1 +1,0 @@
-../../src/email-struct.d.ts

@@ -1,5 +1,6 @@
 import {SchemaDefinition} from "mongoose";
 import {MyDocument} from "@gongt/ts-stl-server/database/mongodb";
+import {EmailStruct} from "../package";
 
 export const SendQueueSchema: SchemaDefinition = {
 	_id: String,

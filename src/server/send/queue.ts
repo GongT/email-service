@@ -3,6 +3,7 @@ import {ERequestType} from "@gongt/ts-stl-library/request/request";
 import {JsonApiHandler} from "@gongt/ts-stl-server/express/api-handler";
 import {ValueChecker} from "@gongt/ts-stl-server/value-checker/value-checker";
 import {instance as sendQueue} from "../../database/send-queue";
+import {EmailStruct} from "../../package";
 
 interface SendBody extends ApiRequest {
 	list: (EmailStruct&{callbackId: string})[];

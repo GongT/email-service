@@ -1,8 +1,28 @@
-/// <reference path="./globals.d.ts"/>
 import {RequestApiWrap, requestWrap} from "./request-wrap";
 export interface IEmailSenderOptions {
 	projectName: string;
 	requestToken?: string;
+	serverUrl?: string;
+}
+
+export interface EmailStruct { // Must equals to /sed/raw api params
+	to: string;
+	subject: string;
+	html: string;
+	text?: string;
+}
+
+function tryGuessServer(options: IEmailSenderOptions) {
+	try {
+		const {JsonEnv} = require('@gongt/jenv-data');
+		if (!options.requestToken) {
+			options.requestToken = JsonEnv.serverRequestKey;
+		}
+		if (!options.serverUrl) {
+			options.serverUrl = JsonEnv.email['apiEndPoint'] || 'http://email.' + JsonEnv.baseDomainName;
+		}
+	} catch (e) {
+	}
 }
 
 export class EmailSender {
@@ -17,7 +37,18 @@ export class EmailSender {
 		if (!options.projectName) {
 			throw new Error('no projectName.');
 		}
-		this.api = requestWrap(options.requestToken);
+		
+		if (!options.requestToken || !options.serverUrl) {
+			tryGuessServer(options);
+		}
+		if (!options.requestToken) {
+			throw new Error('email-sender: no requestToken provided.');
+		}
+		if (!options.serverUrl) {
+			throw new Error('email-sender: can not find serverUrl.');
+		}
+		
+		this.api = requestWrap(options.serverUrl, options.requestToken);
 		this.projectName = options.projectName;
 	}
 	

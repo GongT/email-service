@@ -1,8 +1,9 @@
-import {Model, Document, SchemaDefinition} from "mongoose";
-import {SendQueueSchema, ISendQueueDoc} from "./send-queue.def";
 import {DataModel} from "@gongt/ts-stl-server/database/mongodb";
+import {Document, Model, SchemaDefinition} from "mongoose";
+import {EmailStruct} from "../package";
+import {ISendQueueDoc, SendQueueSchema} from "./send-queue.def";
 
-export type SendQueueModel = ISendQueueDoc & Document;
+export type SendQueueModel = ISendQueueDoc&Document;
 export class SendQueue extends DataModel<ISendQueueDoc> {
 	protected createSchema() {
 		return SendQueueSchema;

@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"module": "commonjs",
 		"target": "es6",
-		"lib": ["es6", "dom", "es2015.promise", "es7"],
+		"lib": ["es5", "es6", "es7"],
 		"declaration": true,
 		"moduleResolution": "node",
 		"noEmitOnError": true,
@@ -17,15 +17,11 @@
 		"isolatedModules": false,
 		"pretty": true,
 		"sourceMap": true,
+		"inlineSources": true,
 		"baseUrl": "./",
-		"typeRoots": [
-			 "../node_modules/@types"
-		],
-		"types": [
-		],
-		"jsx": "react",
-		"outDir": "../dist",
+		"typeRoots": [],
+		"types": [],
+		"outDir": "../../dist/npm-package",
 		"rootDir": "./"
-	},
-	"exclude": ["./client", "node_module", "./dist", "global.d.ts"]
+	}
 }

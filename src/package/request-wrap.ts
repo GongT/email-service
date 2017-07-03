@@ -1,14 +1,13 @@
-import {token, CONFIG_BASE_DOMAIN_SERVER} from "./cfg";
 const request = require("request");
 
-const pkgVersion = require('../package.json').version;
+const pkgVersion = require('./package.json').version;
 const agent = `nodejs:v${process.version} email-client:v${pkgVersion}`;
 
 export interface RequestApiWrap {
 	(method: string, api: string, params: any, body?: any): Promise<void>;
 }
 
-export function requestWrap(requestKey: string = token): RequestApiWrap {
+export function requestWrap(baseUrl: string, requestKey: string): RequestApiWrap {
 	return function requestJson(method: string, api: string, params: any, body?: any): Promise<void> {
 		if (params) {
 			params = Object.assign({}, params);
@@ -17,7 +16,7 @@ export function requestWrap(requestKey: string = token): RequestApiWrap {
 			body = Object.assign({}, body);
 		}
 		const opt = {
-			baseUrl: CONFIG_BASE_DOMAIN_SERVER,
+			baseUrl: baseUrl,
 			qs: params, // Object
 			json: true,
 			method: method,
@@ -42,6 +41,7 @@ export function requestWrap(requestKey: string = token): RequestApiWrap {
 			}
 			return undefined;
 		}, (e) => {
+			console.error('email-service: fail request: %j', opt);
 			console.error('email-service: fail request: %s', e.message);
 			throw e;
 		});

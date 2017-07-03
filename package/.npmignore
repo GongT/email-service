@@ -1,6 +1,0 @@
-*.tgz
-.*ignore
-create-config.js
-build.Dockerfile
-build.sh
-node_modules

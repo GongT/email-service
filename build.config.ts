@@ -42,28 +42,25 @@ build.addPlugin(EPlugins.typescript, {
 });
 
 build.addPlugin(EPlugins.typescript, {
-	source: 'package/src',
-	target: 'package/dist',
+	source: 'src/package',
+	target: 'dist/npm-package',
 });
 
 build.environmentVariableAppend('DEBUG', ',email:*');
-
-// build.volume('/host/folder/path', '/mnt/in/container');
-
-// build.prependDockerFile('/path/to/docker/file');
-// build.appendDockerFile('/path/to/docker/file');
-
 build.listenPort(JsonEnv.email.debugPort);
-
-build.addPlugin(EPlugins.npm_publish, {
-	path: './package'
-});
-
 build.dockerRunArgument('--dns=${HOST_LOOP_IP}');
 
 build.onConfig((isBuild) => {
-	const config = helper.createConfig(`
-export const token: string = ${JSON.stringify(JsonEnv.serverRequestKey)};
-`);
-	config.save('package/src/cfg.ts');
+	if (!isBuild) {
+		const r = require('child_process').spawnSync('sh', ['pre-start.sh'], {
+			stdio: 'inherit',
+			cwd: __dirname,
+		});
+		if (r.error) {
+			throw r.error;
+		}
+		if (r.status !== 0) {
+			process.exit(r.status);
+		}
+	}
 });

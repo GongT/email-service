@@ -1,15 +1,15 @@
 {
 	"name": "@gongt/email-sender",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "email sender client",
 	"main": "index.js",
 	"scripts": {},
 	"author": "",
 	"dependencies": {
-		"request": "^2.79.0"
+		"request": "^2.81.0"
 	},
 	"devDependencies": {
-		"@types/request": "0.0.39",
-		"@types/node": "^7.0.0"
+		"@types/request": "2.0.0",
+		"@types/node": "^8.0.16"
 	}
 }

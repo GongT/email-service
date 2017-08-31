@@ -25,4 +25,5 @@ build.config.ts
 !.micro-build/docker/plugins
 dist/
 dist/npm-package/
+!.babelrc
 ### <<< END MICRO-BUILD SECTION

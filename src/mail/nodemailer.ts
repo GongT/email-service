@@ -1,7 +1,9 @@
+import {createLogger} from "@gongt/ts-stl-library/log/debug";
+import {LOG_LEVEL} from "@gongt/ts-stl-library/log/levels";
 /// <reference path="../globals.d.ts"/>
 import {createTransport} from "nodemailer";
-import {createDebug} from "@gongt/ts-stl-server/debug";
-const debug = createDebug('mail');
+
+const debug = createLogger(LOG_LEVEL.DEBUG, 'mail');
 
 export const senderAddress = JsonEnv.email.senderAddress || JsonEnv.email.mailService.auth.user;
 export const senderName = JsonEnv.email.senderName;

@@ -1,15 +1,16 @@
+import {createLogger} from "@gongt/ts-stl-library/log/debug";
+import {LOG_LEVEL} from "@gongt/ts-stl-library/log/levels";
 import {REQUEST_METHOD} from "@gongt/ts-stl-library/request/request-method";
 import {requestJson} from "@gongt/ts-stl-server/communication/request-json";
-import {createLogger, LEVEL} from "@gongt/ts-stl-server/debug";
 import {SendMailOptions} from "nodemailer";
 import {instance as emailHistoryModel} from "../database/mail-history";
 import {instance as sendQueue} from "../database/send-queue";
 import {senderAddress, senderName, transporter} from "../mail/nodemailer";
 import Timer = NodeJS.Timer;
 
-const debug = createLogger(LEVEL.SILLY, 'SendQueue');
-const error = createLogger(LEVEL.ERROR, 'SendQueue');
-const info = createLogger(LEVEL.INFO, 'raw');
+const debug = createLogger(LOG_LEVEL.SILLY, 'SendQueue');
+const error = createLogger(LOG_LEVEL.ERROR, 'SendQueue');
+const info = createLogger(LOG_LEVEL.INFO, 'raw');
 
 let currentTimeout: Timer;
 

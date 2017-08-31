@@ -16,6 +16,7 @@ package-lock.json
 !.gitinclude
 dist/
 dist/npm-package/
+!.babelrc
 ### <<< END MICRO-BUILD SECTION
 
 typescript-common-library

@@ -1,18 +1,20 @@
+import {createLogger} from "@gongt/ts-stl-library/log/debug";
+import {LOG_LEVEL} from "@gongt/ts-stl-library/log/levels";
 import {ApiRequest, ApiResponse} from "@gongt/ts-stl-library/request/protocol";
 import {ERequestType} from "@gongt/ts-stl-library/request/request";
-import {createDebug, LEVEL} from "@gongt/ts-stl-server/debug";
 import {JsonApiHandler} from "@gongt/ts-stl-server/express/api-handler";
 import {ValueChecker} from "@gongt/ts-stl-server/value-checker/value-checker";
 import {SendMailOptions} from "nodemailer";
 import {instance as emailHistoryModel} from "../../database/mail-history";
 import {senderAddress, senderName, transporter} from "../../mail/nodemailer";
 
-const debug = createDebug('raw', LEVEL.SILLY);
-const info = createDebug('raw', LEVEL.INFO);
+const debug = createLogger(LOG_LEVEL.SILLY, 'raw');
+const info = createLogger(LOG_LEVEL.INFO, 'raw');
 
 interface SendBody extends ApiRequest, SendMailOptions {
 	files?: Express.Multer.File[];
 }
+
 const rawSendApi = new JsonApiHandler<SendBody, {}&ApiResponse>(ERequestType.TYPE_POST, '/send/raw');
 rawSendApi.handleArgument('to').fromPost()
           .filter(new ValueChecker().isString().isEmail());
